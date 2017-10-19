@@ -1,0 +1,97 @@
+
+SCALA中有一种模式：
+	贷出模式
+		贷出函数（Loan Function）
+			定义了系统资源的获取与回收
+				类似于连接数据库的时候，连接池
+		用户函数
+			用户编程
+
+SparkCore/SQL
+	如何与HBase表中的数据进行交互？？？？？
+	
+val rdd = sc.textFile("")
+	上述读取数据的底层使用的是MapReduce底层读取HDFS文件的方式
+	InputFormat:
+		TextInputFormat -> <key, value>
+			
+SparkCore 读写HBase表中的数据
+	应该与MapReduce程序读写HBase表中的数据是一样一样的，尤其是底层
+	HBase存储数据的文件HFile，存储在HDFS
+		
+	
+newAPI
+	历史遗留问题
+	hadoop 0.20.0 开始
+		新的编程API
+			-1,包名
+				org.apache.hadoop.mapreduce.*
+			-2,基类
+				抽象类或者类
+				Mapper\Reducer\Parititoner
+		旧的编程API
+			-1,包名
+				org.apache.hadoop.mapred.*
+			-2,基类
+				接口
+	
+	TableInputFormat
+	<ImmutableBytesWritable, Result>
+	
+create 'ht_wordcount', 'info'	
+	
+put 'ht_wordcount', 'spark', 'info:count', '1345'	
+put 'ht_wordcount', 'hive', 'info:count', '342'	
+put 'ht_wordcount', 'mapreduce', 'info:count', '120'	
+put 'ht_wordcount', 'hdfs', 'info:count', '4567'	
+put 'ht_wordcount', 'python', 'info:count', '453'	
+
+
+
+
+========================================================
+RDD#saveAsTextFile("")
+	底层也是调用MapReduce中Reduce的数据输出
+	OutputFormat
+		TextOutputFormat
+			\t 制表符分割
+	MapReduce向HBase表中写数据
+	TableOutputFormat
+The KEY is ignored
+ * while the output value <u>must</u> be either a {@link Put} or a
+ * {@link Delete} instance.
+	告诉我们，使用MapReduce向HBase表输出数据的时候，
+		Key：
+			被忽略，任意值，无所谓
+			NullWritable
+			ImmutableBytesWritable
+		Value：
+			Put：
+				插入数据
+			Delete：
+				删除数据
+
+def saveAsNewAPIHadoopDataset(conf: Configuration)
+
+=====================================================
+sqlContext.read.hbase()
+sqlContext.write.hbase()
+
+-1,高版本的HBase版本中已经有一个模块
+	集成Spark，可以读写数据
+-2,Astro
+	Spark-SQL-on-HBase
+	https://github.com/Huawei-Spark/Spark-SQL-on-HBase
+-3,SparkSQL -> HIVE  -> HBase
+	此种方式逻辑没有问题
+	但是实际问题一堆！！！！！！！！！
+	-i,当HBase表中的数据不变动的时候
+		SparkSQL此种方式读取没问题，偶尔会出现莫名其妙问题
+	-ii,不支持SparkSQL向表中写数据
+-4,其他公司开源的框架
+	自己也可以写
+
+
+================================================================
+作业：
+	使用JAVA编程试下LogAnalyzerSpark 案例并测试

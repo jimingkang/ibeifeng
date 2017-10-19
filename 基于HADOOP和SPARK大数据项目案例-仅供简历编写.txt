@@ -1,0 +1,47 @@
+
+简历编写项目：
+	-i,某银行卡联合组织大数据平台
+		http://www.paraview.cn/example/example_show/13
+	-ii,某知名证券商大数据平台
+		http://www.paraview.cn/example/example_show/14
+	-iii,某知名汽车制造集团大数据平台
+		http://www.paraview.cn/example/example_show/29
+		
+Lambda架构:
+	-i,离线分析
+		对历史数据进行分析，如果使用算法进行训练建模
+	-ii,实时统计
+		对实时的数据进行状况统计以及预测推荐
+		
+	技术架构
+	常见于电商互联网公司的 深入分析
+作业：
+	Lambda架构 是啥？画出基于HADOOP/SPARK技术架构图。
+	
+不仅使用Kerberos，Sentry安全机制，同时使用Cloudera Navigator进行多层数据加密。
+	15年在五六月份出现数据安全问题
+Kerberos
+	认证机制
+	基本所有的常用的大数据技术框架都支持此认证
+Sentry
+	Apache顶级项目，Cloudera公司开源的，专门用于HADOOP数据管理，基于角色的权限管理。
+	sentry.apache.org
+Cloudera Navigator
+	企业版本CM所拥有的元数据管理功能。
+	
+	
+	
+对数据处理忍受的最大时限为T+1工作日	
+	基于HADOOP/SPARK离线分析，基本上都是T+1
+	通常分析处理的数据为前一天的数据
+		半夜以后，分析前一天的数据
+	第二天早上八点以后，看到前一天的数据统计分析报表
+		前一天
+		前三天
+		前一周
+		前一个月
+	示例：
+		http://tongji.baidu.com/
+	
+	
+	

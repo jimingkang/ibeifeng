@@ -1,0 +1,21 @@
+import
+--connect
+"jdbc:mysql://192.168.229.129:3306/test"
+--username
+root
+--password
+123456
+--query 
+"select date,id,order_id,product_id,user_id,price,product_num,rk from so_detail where $CONDITIONS "
+-m
+5
+--split-by
+id
+--hbase-table
+so_detail
+--hbase-row-key
+rk
+--column-family
+cf
+
+

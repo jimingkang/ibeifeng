@@ -1,0 +1,19 @@
+import
+--connect
+"jdbc:mysql://192.168.229.129:3306/test"
+--username
+root
+--password
+123456
+--query 
+"select rk,order_id from so where $CONDITIONS "
+-m
+1
+--hbase-table
+order_his_idx
+--hbase-row-key
+rk
+--column-family
+cf
+
+

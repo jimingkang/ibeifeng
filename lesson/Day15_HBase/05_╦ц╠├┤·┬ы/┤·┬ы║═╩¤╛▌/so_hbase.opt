@@ -1,0 +1,21 @@
+import
+--connect
+"jdbc:mysql://192.168.229.129:3306/test"
+--username
+root
+--password
+123456
+--query 
+"select date,order_id,user_id,order_amt,reverse(order_id) r_order_id from so where $CONDITIONS "
+-m
+5
+--split-by
+order_id
+--hbase-table
+so
+--hbase-row-key
+r_order_id
+--column-family
+cf
+
+
